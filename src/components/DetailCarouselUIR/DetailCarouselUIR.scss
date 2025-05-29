@@ -1,0 +1,192 @@
+@use '../../styles/variables' as *;
+// Original path: ui.frontend/src/main/webpack/components/maseratiRedesign/detail-carousel-uir/scss/_style.scss
+// Variables like $opaqueBlack, $white, $black, $asphaltBlack, $yellow, $blueMaserati 
+// and mixins like fontEverett are assumed to be globally available or defined in a shared _variables.scss / _mixins.scss
+
+$detail-carousel: "detail-carousel-uir";
+// $opaqueBlack: #757575; // Example: define if not global
+
+/**
+* Breakpoints - these should ideally be in a global _variables.scss
+*/
+// $superSmallPhone: 376px - 1;
+// $smallPhone: 480px - 1;
+// $smartphone: 768px - 1;
+// $tabletPortrait: 1024px - 1;
+// $tabletLandscapeSmallDesktop: 1280px - 1;
+// $midDesktop: 1440px - 1;
+
+.#{$detail-carousel} {
+  // Theme classes like .background-white, .background-black, .background-blue 
+  // are applied to the root element of DetailCarouselUIR or its parent in App.jsx for this sandbox.
+  // These styles will apply if the parent div in App.jsx has these classes.
+  &.background-white {
+    background-color: $white; // Assumes $white is defined
+    color: $black; // Assumes $black is defined
+
+    .#{$detail-carousel}-text-container {
+      h3 { color: $opaqueBlack; } // Assumes $opaqueBlack is defined
+      p { color: $black; }
+    }
+  }
+
+  &.background-black {
+    background-color: $asphaltBlack; // Assumes $asphaltBlack is defined
+    color: $white;
+
+    .#{$detail-carousel}-text-container {
+      h3 { color: $yellow; } // Assumes $yellow is defined
+      p { color: $white; }
+    }
+  }
+
+  &.background-blue {
+    background-color: $blueMaserati; // Assumes $blueMaserati is defined
+    color: $white;
+
+    .#{$detail-carousel}-text-container {
+      h3 { color: $yellow; }
+      p { color: $white; }
+    }
+  }
+
+  // Orientation styles: .portrait, .landscape, .responsive-height
+  // These are applied based on the 'orientation' prop passed to GenericCarousel
+  &.portrait {
+    .#{$detail-carousel}__slides {
+      .#{$detail-carousel}__slide {
+        max-width: 436px;
+        img {
+          @media all and (max-width: $smartphone) { // Assumes $smartphone is defined
+            min-height: 460px;
+          }
+        }
+      }
+     }
+   }
+
+  &.landscape {
+    .#{$detail-carousel}__slides {
+      .#{$detail-carousel}__slide {
+        max-width: 896px;
+        img {
+          object-fit: cover;
+          @media all and (max-width: $smartphone) {
+            min-height: 460px;
+          }
+        }
+      }
+    }
+  }
+
+  &.responsive-height {
+    .#{$detail-carousel}__slides {
+      .#{$detail-carousel}__slide {
+        max-width: 896px;
+        img {
+          object-fit: contain;
+          @media all and (max-width: $smartphone) {
+            min-height: 214px;      
+          }
+        }
+      }
+    }
+  }
+  
+  // &__container is a class applied by GenericCarousel, so these styles target that structure.
+  // If DetailCarouselUIR has its own container, adjust the selector.
+  // For this sandbox, assuming GenericCarousel's container is the primary one.
+  &__container { // This refers to .detail-carousel-uir__container (applied by GenericCarousel)
+    padding: 120px 0; // Original had 120px 0, GenericCarousel has 120px 18.9%. Choose one or make specific.
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @media all and (max-width: $tabletPortrait) { // Assumes $tabletPortrait is defined
+      padding: 80px 16px;
+    }
+
+    @media all and (max-width: $smartphone) {
+      gap: 24px;
+    }
+
+    .#{$detail-carousel}__slides { // This refers to .detail-carousel-uir__slides (applied by GenericCarousel)
+      .#{$detail-carousel}__slide { // This is the slide element rendered by DetailCarouselUIR
+        transition: transform 0.3s, opacity 0.3s;
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 calc(63.4vw - 16px); // This might need review based on GenericCarousel's slide sizing
+
+        @media all and (max-width: $smartphone) {
+          flex: 0 0 calc(100vw - 32px); // Full width minus padding
+        }
+
+        img {
+          width: 100%;
+          object-fit: cover;
+          display: block;
+
+          @media all and (min-width: $smartphone) { // Note: original was min-width, not max-width
+            max-height: 560px;
+            min-height: 560px;
+          }
+
+          @media all and (max-width: $smartphone) {
+            min-width: 100%; // Ensure image takes full width on mobile
+          }
+        }
+
+        // Text container specific to DetailCarouselUIR slides
+        .#{$detail-carousel}-text-container { // Renamed from original for clarity if needed, or keep as is
+          h3 {
+            // @include fontEverett; // Assumes fontEverett mixin is available
+            font-family: 'Everett', sans-serif; // Fallback
+            padding: 16px 0 0 0;
+            margin: 0;
+            width: 100%;
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.75px;
+            text-transform: uppercase;
+            text-align: left;
+          }
+
+          p {
+            // @include fontEverett;
+            font-family: 'Everett', sans-serif; // Fallback
+            padding: 0;
+            margin: 16px 0 0 0;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: 0.14px;
+            text-transform: uppercase;
+            text-align: left;
+
+            @media all and (max-width: $smartphone) {
+              line-height: 26px; // Specific mobile line height
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // These styles might be AEM-specific for animation blocking. Review if needed for sandbox.
+  .scrollBlocker{
+    display: none;
+  }
+  &.activeAn{
+    .scrollBlocker{
+      display: block;
+      position: absolute; // This needs a positioned parent to work as expected
+      width: 100%;
+      height:100%;
+      z-index: 20;
+      background: transparent;
+    }
+  }
+}

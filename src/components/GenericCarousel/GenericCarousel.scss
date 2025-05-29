@@ -1,0 +1,283 @@
+// Colors
+$white: #FFFFFF;
+$black: #000000;
+$yellow: #FFC845;
+$blueMaserati: #1C3775;
+$asphaltBlack: #0D0D0D;
+$opaqueBlack: #757575;
+
+// Component name
+$generic-carousel: "generic-carousel-uir";
+
+
+// Breakpoints - these can be moved to a global _variables.scss if shared
+$superSmallPhone: 376px - 1; 
+$smallPhone: 480px - 1; 
+$smartphone: 768px - 1; 
+$tabletPortrait: 1024px - 1; 
+$tabletLandscapeSmallDesktop: 1280px - 1; 
+$midDesktop: 1440px - 1; 
+
+.#{$generic-carousel} {
+    // Background color styles are kept, assuming they might be controlled by props or parent context
+    &.background-white {
+        background-color: $white;
+        color: $black;
+  
+    
+        .#{$generic-carousel}__ctas {
+          &__primary,
+          &__secondary {
+            border-color: $black;
+            color: $black;
+          }
+        }
+    
+        .#{$generic-carousel}__progress-bar {
+          background-color: rgba(0, 0, 0, 0.15);
+          &-fill {
+            background-color: $black;
+          }
+        }
+        
+        .#{$generic-carousel}__navigation {
+          .#{$generic-carousel}__prev-btn,
+          .#{$generic-carousel}__next-btn {
+            background-color: $white;
+            color: $black;
+          }
+        }
+      }
+    
+      &.background-black {
+        background-color: $asphaltBlack;
+        color: $white;
+
+        .#{$generic-carousel}__ctas {
+          &__primary,
+          &__secondary {
+            background-color: $yellow;
+            border-color: $yellow;
+            color: $black;
+          }
+        }
+    
+        .#{$generic-carousel}__progress-bar {
+          background-color: rgba(255, 255, 255, 0.15);
+          &-fill {
+            background-color: $yellow;
+          }
+        }
+    
+        .#{$generic-carousel}__navigation {
+          .#{$generic-carousel}__prev-btn,
+          .#{$generic-carousel}__next-btn {
+            background-color: $black; // Assuming $asphaltBlack or $black based on context
+            color: $white;
+          }
+        }
+      }
+    
+      &.background-blue {
+        background-color: $blueMaserati;
+        color: $white;
+    
+        .#{$generic-carousel}__ctas {
+          &__primary,
+          &__secondary {
+            background-color: $yellow;
+            border-color: $yellow;
+            color: $black;
+          }
+        }
+    
+        .#{$generic-carousel}__progress-bar {
+          background-color: rgba(255, 255, 255, 0.15);
+          &-fill {
+            background-color: $yellow;
+          }
+        }
+    
+        .#{$generic-carousel}__navigation {
+          .#{$generic-carousel}__prev-btn,
+          .#{$generic-carousel}__next-btn {
+            background-color: $white; // Or $blueMaserati depending on design
+            color: $yellow; // Or $white
+          }
+        }
+      }
+
+  .#{$generic-carousel}__container {
+    user-select: none;
+    cursor: grab;
+    
+    &:active {
+      cursor: grabbing;
+    }
+
+    padding: 120px 18.9%; // This might need adjustment for a standalone component
+    overflow:hidden;
+
+    @media all and (max-width: $tabletPortrait) {
+      padding: 80px 16px;
+    }
+  }
+
+    .#{$generic-carousel}__slides {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+        will-change: transform;
+        gap: 16px;
+        opacity: 1;
+        visibility: visible;
+        box-sizing: border-box;
+        order: 1;
+        user-select: none;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        perspective: 1000;
+        -webkit-touch-callout: none;
+
+        @media all and (max-width: $smartphone) {
+          padding: 0;
+          margin: 0;
+          gap: 8px;
+        }
+
+        .#{$generic-carousel}__slide {
+          will-change: transform;
+          transition: all 0.3s ease;
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+
+          &::after {
+            content: '';
+            display: flex;
+            width: 100%;
+            height: 100%;
+            /* min-height: 100%; */
+            top: 0;
+            position: absolute;
+            left: 0;
+          }
+        }
+    }
+
+    .#{$generic-carousel}__navigation {
+        display: flex;
+        max-height: 72px;
+        padding: 16px 0;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+        order: 2;
+
+        @media all and (max-width: $smartphone) {
+            padding: 8px 0;
+            max-height: 48px;
+        }
+
+        .#{$generic-carousel}__progress-bar {
+            max-width: 180px;
+            width: 100%;
+            height: 2px;
+            flex-shrink: 0;
+
+            &-fill {
+                height: 100%;
+                transition: width 0.5s ease;
+                will-change: width;
+                transform: translateZ(0);
+            }
+        }
+
+        &-btns {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .#{$generic-carousel}__prev-btn,
+        .#{$generic-carousel}__next-btn {
+            align-items: center;
+            justify-content: center;
+            // background-color: $white; // Background is handled by theme classes now
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 0;
+            display: flex;
+            padding: 10px;
+            cursor: pointer;
+
+            @media all and (max-width: $smartphone) {
+                width: 32px;
+                height: 32px;
+                padding: 6px;
+            }
+
+            & span { // Assuming icon font classes like 'icon-right-arrow' are globally available or replaced
+                color: inherit; // Color will be set by theme classes
+                font-size: 8px;
+                flex-shrink: 0;
+
+                &::before {
+                    width: 20px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                &.left-arrow {
+                    transform: rotate(180deg);
+                }
+            }
+
+            &.disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .#{$generic-carousel}__ctas {
+        display: flex;
+        align-items: flex-start;
+        align-self: stretch;
+        flex-wrap: wrap;
+        gap: 24px 16px;
+        order: 3;
+    
+        @media all and (max-width: $smartphone) {
+          padding: 0;
+          flex-direction: column;
+        }
+    
+        &__primary,
+        &__secondary  {
+          // @include fontEverett; // Assuming fontEverett mixin is globally available or defined
+          font-family: 'Everett', sans-serif; // Fallback if mixin not available
+          display: flex;
+          max-height: 54px;
+          max-width: 240px;
+          padding: 12px 40px;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          align-self: stretch;
+          text-align: center;
+          font-size: 11px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 15px; /* 136.364% */
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          text-decoration: none;
+          border: 1px solid $black; // Border color handled by theme classes
+          box-sizing: border-box;
+        }
+      }
+}

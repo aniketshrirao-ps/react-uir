@@ -1,0 +1,433 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.tab-component {
+  position: relative;
+  width: 100%;
+  // max-width: 1440px;
+  // height: 810px;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 80px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Everett, sans-serif;
+  color: white;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+// ========== TAB MENU ==========
+.tab-menu {
+  display: flex;
+  padding: 14px 16px 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  background: #fff;
+  z-index: 5;
+  position: relative;
+
+  button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    color: var(--Label, #757575);
+    font-family: Everett;
+    font-style: normal;
+    line-height: 19.6px;
+    letter-spacing: 0.14px;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 1px;
+      width: 100%;
+      background: black;
+      opacity: 0.4;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.8s ease;
+      align-self: stretch;
+    }
+
+    &.active::after {
+      transform: scaleX(1);
+      opacity: 1;
+      color: var(--UI---100, #0d0d0d);
+    }
+
+    &.active {
+      opacity: 1;
+      color: var(--UI---100, #0d0d0d);
+    }
+
+    &.highlight {
+      background-color: rgba(0, 123, 255, 0.1); // soft light blue
+      box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15); // 👈 creates a larger box without layout shift
+      transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+  }
+  @keyframes blink-tab {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+      transform: scale(0.95);
+    }
+  }
+}
+
+// ========== BACKGROUND IMAGE ==========
+
+.background-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.background-layer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    z-index: 1;
+  }
+}
+
+// .background-slide-outer {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+//   z-index: -1;
+
+//   &::before {
+//     content: "";
+//     position: absolute;
+//     inset: 0;
+//     background: rgba(0, 0, 0, 0.4); // Adjust darkness here
+//     z-index: 1;
+//     pointer-events: none;
+//   }
+
+//   .background-slide-inner {
+//     display: flex;
+//     flex-direction: row-reverse;
+//     height: 100%;
+//   }
+
+//   .background-image {
+//     width: 100%;
+//     height: 100%;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: center center;
+//     flex-shrink: 0;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//   }
+// }
+
+// ========== CONTENT ==========
+
+.content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+// ========== HEADING ==========
+.heading-wrapper .scroll-item {
+  font-family: Everett;
+  font-size: 92px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 95%;
+  letter-spacing: -3.68px;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  &.active {
+    opacity: 1;
+    position: relative;
+    pointer-events: auto;
+    z-index: 1;
+  }
+}
+
+// ========== DESCRIPTION + BUTTON ==========
+
+.buttom-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  gap: 32px;
+}
+.desc-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 720px;
+  min-height: 60px;
+}
+
+.desc-wrapper .scroll-item {
+  font-family: Everett;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0.14px;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  &.active {
+    opacity: 1;
+    position: relative;
+    pointer-events: auto;
+    z-index: 1;
+  }
+}
+
+// ========== BUTTON ==========
+.discover-button {
+  display: flex;
+  width: 240px;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 40px;
+  height: 54px;
+  gap: 8px;
+  background: none;
+  border: 1px solid white;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: white;
+    color: black;
+  }
+}
+
+// ========== WRAPPER FOR DESCRIPTION + BUTTON ==========
+.desc-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 720px;
+}
+
+// ========== SCROLL STACK FOR HEADING ==========
+.heading-wrapper {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 720px;
+}
+
+// ========== RESPONSIVE ==========
+@media (max-width: 768px) {
+  .tab-component {
+    width: 100%;
+    height: auto;
+    padding: 60px 0; // more balanced than 40px
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .heading-wrapper .scroll-item {
+    font-size: 40px;
+    line-height: 90%;
+    letter-spacing: -0.8px;
+    font-weight: 300;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .desc-wrapper .scroll-item {
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0.14px;
+    text-align: center;
+    text-transform: uppercase;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .discover-button {
+    padding: 12px 36px;
+    font-size: 12px;
+    height: 54px;
+    width: 240px;
+    margin-top: 24px;
+  }
+
+  .desc-wrapper {
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .tab-menu {
+    padding: 12px 16px;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    button {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+  .buttom-container {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; // centers heading + desc
+    text-align: center;
+    overflow: hidden;
+    gap: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-component {
+    width: 100%;
+    height: 812px;
+    padding: 80px 0px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .heading-wrapper .scroll-item {
+    font-size: 40px;
+    line-height: 90%; // 36px
+    letter-spacing: -0.8px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .desc-wrapper .scroll-item {
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0.14px;
+    text-transform: uppercase;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .discover-button {
+    width: 240px;
+    height: 54px;
+    font-size: 12px;
+    padding: 12px 40px;
+    margin-top: 24px;
+  }
+
+  .tab-menu {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+
+    button {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
+  .desc-wrapper {
+    gap: 24px;
+    margin-top: 24px;
+  }
+}

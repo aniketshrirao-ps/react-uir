@@ -1,0 +1,446 @@
+$tool-version-carousel: 'tool-version-carousel';
+$tool-version-carousel-uir: 'tool-version-carousel-uir';
+
+$superSmallPhone: 376px - 1; 
+$smallPhone: 480px - 1; 
+$smartphone: 768px - 1; 
+$tabletPortrait: 1024px - 1; 
+$tabletLandscapeSmallDesktop: 1280px - 1; 
+$midDesktop: 1440px - 1; 
+
+
+$asphaltBlack: #0D0D0D;
+$opaqueBlack: #757575;
+$white: #FFFFFF;
+$black: #000000;
+
+@mixin fontEverett {
+    font-family: "Everett", sans-serif;
+}
+
+.#{$tool-version-carousel-uir} {
+    &.background-white {
+        background-color: $white;
+        color: $black;
+
+        .#{$tool-version-carousel} {
+            &__headline,
+            &__model-specs,
+            &__model-name,
+            &__model-desc,
+            &__cta-link {
+                color: $black;
+            }
+
+            &__cta-link {
+                &::after {
+                    background: $black;
+                }
+            }
+        }
+
+        .btn-secondary-dark {
+            color: $black;
+            border: 1px solid $black;
+
+            &::after {
+              background: $black;
+            }
+
+            &:hover {
+              color: $white;
+              border: 1px solid $white;
+            }
+        }
+      }
+    
+    &.background-black {
+        background-color: $asphaltBlack;
+        color: $white;
+
+        .#{$tool-version-carousel} {
+            &__headline,
+            &__model-specs,
+            &__model-name,
+            &__model-desc,
+            &__cta-link {
+                color: $white;
+            }
+
+            &__prev-btn,
+            &__next-btn {
+                background-color: $black;
+                color: $white;
+            }
+
+            .btn-secondary-dark {
+                &:hover {
+                    span {
+                        color: $black;
+                    }
+                }
+            }
+
+            &__cta-link {
+                &::after {
+                    background: $white;
+                }
+            }
+        }
+    }
+}
+
+.#{$tool-version-carousel} {
+    padding: 120px 0;
+    position: relative;
+
+      @media all and (max-width: $tabletPortrait) {
+        padding: 80px 16px;
+      }
+
+    &__headline {
+        @include fontEverett;
+        text-align: center;
+        /* D/Headline */
+        font-size: 92px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 95%;
+        /* 87.4px */
+        letter-spacing: -3.68px;
+        text-transform: uppercase;
+        max-width: 997px;
+        margin: 0 auto;
+        padding-bottom: 120px;
+
+        @media all and (max-width: $tabletPortrait) {
+            font-size: 40px;
+            line-height: 90%; /* 36px */
+            letter-spacing: -0.8px;
+            padding-bottom: 40px;
+        }
+
+    }
+
+    &__card-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__card-slides {
+        position: relative;
+        display: flex;
+        gap: 16px;
+        width: 100%;
+        height: auto;
+        transform: translateX(0);
+        will-change: transform;
+        margin-bottom: 30px;
+        max-width: 896px;
+
+        @media all and (max-width: $tabletPortrait) {            
+            gap: 8px;
+            margin-bottom: 20px;
+            max-width: 343px;
+        }
+    }
+
+    &__card {
+        position: relative;
+        width: 100%;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.active {
+            z-index: 2;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    // Center content wrapper
+    &__content-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__model-specs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 12px;
+
+        h3 {
+            @include fontEverett;
+            text-align: center;
+            /* D/Eyebrow */
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+            /* 15.4px */
+            letter-spacing: 0.11px;
+            text-transform: uppercase;
+            padding-bottom: 6px;
+        }
+    }
+
+    &__model-name-wrapper,
+    &__model-desc-wrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        min-height: 60px;
+        max-width: 720px; // Match AccelerationTab's max-width
+        margin: 0 auto; // Center the wrapper
+    }
+
+    &__model-name-wrapper {
+        max-width: unset;
+        min-height: auto;
+    }
+
+    &__model-name,
+    &__model-desc {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0; // Add right: 0 to ensure content stays centered
+        width: 100%;
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 0;
+        margin: 0 auto; // Center the content
+        max-width: 600px; // Match AccelerationTab's max-width for text
+
+        &.active {
+            position: relative;
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
+        }
+        
+        // Remove any existing transition properties that might interfere with GSAP
+        transition: none;
+    }
+
+    &__model-name {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: unset;
+        h2 {
+            @include fontEverett;
+            text-align: center;
+            font-size: 64px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 100%; /* 64px */
+            letter-spacing: -1.92px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+
+            @media all and (max-width: $tabletPortrait) {
+                font-size: 30px;
+                line-height: 95%; /* 28.5px */
+                letter-spacing: -0.3px;
+            }
+        }
+    }
+
+    &__model-desc {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0; // Add right: 0 to ensure content stays centered
+        width: 100%;
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 0;
+        max-width: 600px; // Match AccelerationTab's max-width for text
+        margin: 0 auto; // Center the content
+        
+        &.active {
+            position: relative;
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
+        }
+    }
+
+    &__navigation {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+        width: 100%;
+        z-index: 1;
+        max-width: 896px;
+        bottom: 30px;
+    
+        @media all and (max-width: $smartphone) {
+            max-width: 100%;
+            bottom: 10px;
+        }
+
+        @media all and (max-width: $smallPhone) {
+            bottom: 17px;
+        }
+
+    }
+
+    .#{$tool-version-carousel}__prev-btn,
+    .#{$tool-version-carousel}__next-btn {
+        align-items: center;
+        justify-content: center;
+        background-color: $white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 0;
+        display: flex;
+        padding: 10px;
+        cursor: pointer;
+        background: chocolate; // Temporary background color for visibility
+
+        @media all and (max-width: $smartphone) {
+            width: 32px;
+            height: 32px;
+            padding: 6px;
+        }
+
+        & span {
+            color: inherit;
+            font-size: 8px;
+            flex-shrink: 0;
+            &::before {
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            &.left-arrow {
+                transform: rotate(180deg);
+            }
+        }
+        &.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+    }
+
+    &__button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+        
+        @media all and (max-width: $smartphone) {
+            gap: 32px;
+        }
+
+        .btn-secondary-dark {
+            @include fontEverett;
+            max-height: 54px;
+            max-width: 240px;
+            padding: 12px 40px;
+            text-align: center;
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 15px; /* 136.364% */
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-sizing: border-box;
+            margin: 0 auto;
+            cursor: pointer;
+
+            @media all and (max-width: $smallPhone) {
+                max-width: unset;
+            }
+
+            span {
+                z-index: 1;
+            }
+
+            &::before {
+                display: none;
+            }
+        }
+    }
+
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__cta-link {
+        @include fontEverett;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        background: none;
+        border: none;
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 0;
+        font-style: normal;
+        line-height: 19.6px;
+        letter-spacing: 0.14px;
+        opacity: 1;
+        cursor: pointer;
+
+        &::after {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 100%;
+            opacity: 0.4;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s ease;
+            align-self: stretch;
+        }
+
+        &:hover::after {
+            transform: scaleX(1);
+            opacity: 1;
+        }
+    }
+}

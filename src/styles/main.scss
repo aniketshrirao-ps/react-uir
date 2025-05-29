@@ -1,0 +1,57 @@
+// Global styles and variable imports
+// @import './_variables.scss'; // For shared variables like colors, breakpoints
+
+// @import './_mixins.scss'; // If you have global mixins
+// @import './_fonts.scss'; // If you have font definitions
+
+// Import component-specific styles
+// @import '../components/GenericCarousel/GenericCarousel.scss';
+// @import '../components/DetailCarouselUIR/DetailCarouselUIR.scss';
+@use './variables' as *;
+
+// Use @use for component styles
+@use '../components/GenericCarousel/GenericCarousel.scss';
+@use '../components/DetailCarouselUIR/DetailCarouselUIR.scss';
+
+
+// Global app styles (if any, beyond App.css)
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f0f0; // A light background for the sandbox page
+}
+
+#root {
+  // Optional: Add some padding or max-width to the root container for better presstentation
+  // max-width: 1280px;
+  // margin: 0 auto;
+  // padding: 20px;
+}
+
+// Basic styling for the App.jsx content outside the carousel
+.App {
+  text-align: center;
+}
+
+.App h1 {
+  margin-bottom: 40px;
+  color: #333;
+}
+
+// Placeholder for icon font if used by carousel buttons
+// If you use specific icon fonts, ensure they are loaded.
+// Example for a generic arrow (can be replaced with SVG or actual icon font classes)
+.icon-right-arrow::before {
+  content: '→'; // Simple arrow, replace with actual icon or SVG
+  display: inline-block;
+}
+
+.icon-right-arrow.left-arrow::before {
+  content: '←'; // Simple arrow, replace with actual icon or SVG
+  display: inline-block;
+  // transform: rotate(180deg); // Already handled in SCSS if this class is used
+}

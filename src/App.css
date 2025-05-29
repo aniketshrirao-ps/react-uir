@@ -1,0 +1,105 @@
+/* App.css - Styles for the main App component */
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #f4f4f4; /* Light grey background for the page */
+  min-height: 100vh; /* Ensure it takes at least full viewport height */
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.carousel-section {
+  margin-bottom: 40px;
+  border-radius: 8px;
+  background-color: #fff; /* White background for carousel sections */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.carousel-section h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Styles for the overlay - ensure it's hidden by default */
+.overlayComponent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlayComponent.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow-y: auto;
+  position: relative; /* For close button positioning */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.overlay-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay-content .close:hover {
+  color: #000;
+}
+
+/* When overlay is open, lock body scroll */
+body.locked {
+  overflow: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  padding: 0;
+}

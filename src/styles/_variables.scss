@@ -1,0 +1,43 @@
+// SCSS Variables for the React Carousel Sandbox
+
+// Colors
+$white: #ffffff;
+$black: #000000;
+$asphaltBlack: #212121; // Example, adjust if different from original
+$opaqueBlack: rgba(0, 0, 0, 0.75); // Example, adjust if different
+$yellow: #ffd900; // Example, adjust if different
+$blueMaserati: #004b87; // Example, adjust if different
+$grey: #f0f0f0; // A generic grey for backgrounds or borders
+$mediumGrey: #cccccc;
+$darkGrey: #333333;
+
+// Breakpoints (adjust as per original project or common usage)
+$superSmallPhone: 375px; // iPhone SE, etc.
+$smallPhone: 480px;
+$smartphone: 767px; // End of typical phone portrait, start of tablet portrait
+$tabletPortrait: 1023px; // End of tablet portrait, start of tablet landscape / small desktop
+$tabletLandscapeSmallDesktop: 1279px;
+$midDesktop: 1439px;
+$largeDesktop: 1919px;
+
+// Font Families (if specific fonts are used and not globally available)
+// $fontEverett: 'Everett', sans-serif; // Example
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-s: 8px;
+$spacing-m: 16px;
+$spacing-l: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 40px;
+
+// Z-indexes
+$z-index-overlay: 1000;
+$z-index-modal: 1050;
+$z-index-header: 900;
+
+// Other common variables
+$border-radius-standard: 4px;
+$transition-duration-fast: 0.15s;
+$transition-duration-normal: 0.3s;
+$transition-duration-slow: 0.5s;
